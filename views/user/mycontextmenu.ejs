@@ -1,0 +1,129 @@
+<style>
+/******************************************************************/
+/******************************************************************/
+.rightClick 
+{   width:                      200px;
+    height:                     200px;
+    position:                   absolute;
+    transform:                  scale(0.5);
+    display:                    none;
+    transition:                 all 0.5s ease;
+    z-index:                    100;
+}
+.rightClick .buttons 
+{   width:                      100%;
+    height:                     100%;
+    z-index:                    0;
+    position:                   absolute;
+    transform:                  rotate(180deg);
+    transition:                 all 0.5s ease;
+}
+
+.rightClick .buttons button.but 
+{   cursor:                     pointer;
+    z-index:                    0;
+    border:                     none;
+    outline:                    none;
+    width:                      50px;
+    height:                     50px;
+    background:                 #51e980;
+    border-radius:              50%;
+    display:                    block;
+    position:                   absolute;
+    color:                      #fff;
+    font-size:                  20px;
+}
+
+.rightClick .buttons button.but:nth-child(1) {left: 30px;top: 34px;}
+.rightClick .buttons button.but:nth-child(2) {left: 80px;top: 0px;}
+.rightClick .buttons button.but:nth-child(3) {left: 130px;top: 34px;}
+
+.rightClick .buttons button.but:nth-child(4) {left: 30px;top: 100px;}
+.rightClick .buttons button.but:nth-child(5) {left: 80px;top: 134px;}
+.rightClick .buttons button.but:nth-child(6) {left: 130px;top:100px;}
+
+.rightClick.showing          {transform: scale(1);}
+.rightClick.showing .buttons {transform: rotate(0deg);}
+
+/******************************************************************/
+/******************************************************************/
+</style>
+
+
+    <div class='rightClick showing'>
+        <div class='buttons'>
+	        <button class='but edit'>   <i class="fa fa-edit"></i>         </button>    
+	        <button class='but fav'>    <i class="fa fa-star-o"></i>       </button>    
+	        <button class='but help'>   <i class="fa fa-handshake-o"></i>  </button>    
+
+	        <button class='but quit'>   <i class="fa fa-anchor"></i>       </button>
+	        <button class='but reset'>  <i class="fa fa-power-off"></i>    </button>
+	        <button class='but settings'><i class="fa fa-cogs"></i>        </button>
+        </div>
+    </div>
+    
+    <!--script src="js/user/mycontextmenu.js"></script-->
+    <script>
+        function empty(elem) 
+        {    while (elem.lastChild) elem.removeChild(elem.lastChild);
+        }
+        
+        function shutdownThreejs()
+        {   cancelAnimationFrame(this.requestId);// Stop the animation
+            this.renderer.domElement.addEventListener('dblclick', null, false); //remove listener to render
+            ///////////////////////
+            this.renderer.forceContextLoss();
+            this.renderer.context = null;
+            this.renderer.domElement = null;
+            this.renderer = null;            
+            ///////////////////////
+            this.scene = null;
+            //this.projector = null;
+            this.camera = null;
+            this.controls = null;
+            //empty(this.modelContainer);
+            empty(this.container);
+        }
+        
+        document.oncontextmenu = function() {return false; };
+        $(document).mousedown(function(e) 
+        {   if(e.button === 2) 
+            {   $('.rightClick').removeClass('showing');
+		        var n = $('.rightClick').clone(true);
+		        $('.rightClick').fadeOut(200);
+		        setTimeout(function(){$('.rightClick').css({top:e.pageY-100,left:e.pageX-100}).fadeIn(200).addClass('showing');},200);
+            } 
+	        else if(e.button === 0) 
+	        {   setTimeout(function(){$('.rightClick').removeClass('showing').fadeOut(200);},200);
+	        }
+        });
+
+        $('.rightClick .edit')    .click(function() {alert("Edit Button Pressed");});
+        $('.rightClick .fav')     .click(function() {alert("Favourites Button Pressed");});
+        //$('.rightClick .help')    .click(function() {alert("Help Button Pressed");});*/
+        $('.rightClick .help')    .click(function() 
+        {    $.jsPanel({theme:   "rebeccapurple filledlight",
+                        content: "<div>"+
+                                 "<span class='fa fa-bars'></span>"+
+                                 "<span class='fa fa-sign-in'></span>"+
+                                 "<span class='fa fa-picture-o'></span>"+
+                                 "<span class='fa fa-heart'></span>"+
+                                 "<span class='fa fa-comments'></span>"+
+                                 "</div>"+
+                                 "<div class='textcontent'><h4>Lorem ipsum ...</h4><p>...</p></div>",
+                                 //"<div class='textcontent'><div id='mychat'><a href='http://www.phpfreechat.net'>phpFreeChat</a></div></div>",
+                        }).content.addClass('flexOne');    
+            
+        });
+
+        $('.rightClick .quit')    .click(function() 
+        {   //document.getElementsByTagName('HTML')[0].innerHTML="";
+            $("html").fadeOut(function () 
+            {   shutdownThreejs();
+                window.location.href = "/user/logout";
+            });
+        });
+        
+        $('.rightClick .reset')   .click(function() {alert("Reset Button Pressed");});
+        $('.rightClick .settings').click(function() {alert("Settings Button Pressed");});    
+    </script>

@@ -1,0 +1,322 @@
+<style>
+/******************************************************************/
+/******************************************************************/
+.menu3D a {
+
+    -webkit-transition: all 250ms cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    -moz-transition: all 250ms cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    -ms-transition: all 250ms cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    -o-transition: all 250ms cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    transition: all 250ms cubic-bezier(0.230, 1.000, 0.320, 1.000);
+
+    text-decoration: none;
+}
+
+.menu3D:after {
+
+    box-shadow: 0 1px 16px rgba(0,0,0,0.15);
+    background: #1b1b1b;
+    position: absolute;
+    content: '';
+    height: 10px;
+    width: 100%;
+    top: 0;
+}
+
+/* List styles */
+
+.list3D {
+
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    
+    text-transform: uppercase;
+    position: absolute;
+    margin-left: -140px;
+    margin-top: -280px;
+    top: 55%;
+}
+
+.list3D a {
+    
+    display: block;
+    color: #fff;
+}
+
+.list3D a:hover {
+    text-indent: 20px;
+}
+
+.list3D dt, .list3D dd {
+
+    text-indent: 10px;
+    line-height: 55px;
+    background: #E0FBAC;
+    margin: 0;
+    height: 55px;
+    width: 270px;
+    color: #fff;
+}
+
+.list3D dt {
+
+    /* Since we're hiding elements behind here, we need it in 3d */
+    -webkit-transform: translateZ(0.3px);
+    -moz-transform: translateZ(0.3px);
+    -ms-transform: translateZ(0.3px);
+    -o-transform: translateZ(0.3px);
+    transform: translateZ(0.3px);
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    font-size: 15px;
+}
+
+.list3D dd {
+
+    border-top: 1px dashed rgba(255,255,255,0.3);
+    line-height: 35px;
+    font-size: 11px;
+    height: 35px;
+    margin: 0;
+}
+
+/* UI */
+
+.toggle3D {
+
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    border-radius: 3px;
+
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 50px;
+    margin-left: -70px;
+    margin-top: -20px;
+    background: #2b2b2b;
+    text-align: center;
+    font-size: 12px;
+    position: absolute;
+    height: 50px;
+    bottom: 10%;
+    width: 140px;
+    color: #fff;
+    left: 50%;
+}
+
+.toggle3D:hover {
+    
+    background: #E42692;
+}
+
+/* No CSS 3D support warning */
+.warning3D {
+
+    -webkit-transform: translateZ(2px);
+    -moz-transform: translateZ(2px);
+    -ms-transform: translateZ(2px);
+    -o-transform: translateZ(2px);
+    transform: translateZ(2px);
+
+    background: rgba(255,255,255,0.6);
+    position: fixed;
+    display: none;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.warning3D .message {
+
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    text-align: center;
+    margin-left: -150px;
+    margin-top: -60px;
+    line-height: 1.5;
+    background: #222;
+    font-size: 12px;
+    position: absolute;
+    padding: 10px;
+    width: 280px;
+    color: #fff;
+    left: 50%;
+    top: 50%;
+}
+
+.warning3D .message h1 {
+
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.warning3D .message a {
+
+    text-decoration: none;
+    color: #73C8A9;
+}
+
+/* Individual styles */
+
+.sashimi dt, .sashimi dd, .sashimi a { background: #73C8A9; }
+.nigiri dt, .nigiri dd, .nigiri a { background: #E32551; }
+.maki dt, .maki dd, .maki a { background: #FFC219; }
+
+.sashimi a:hover { background: #61c19e; }
+.nigiri a:hover { background: #d31b46; }
+.maki a:hover { background: #ffbb00; }
+
+.nigiri {
+
+    -webkit-transform: perspective(1200px) rotateY(40deg) !important;
+    -moz-transform: perspective(1200px) rotateY(40deg) !important;
+    -ms-transform: perspective(1200px) rotateY(40deg) !important;
+    -o-transform: perspective(1200px) rotateY(40deg) !important;
+    transform: perspective(1200px) rotateY(40deg) !important;
+
+    -webkit-transform-origin: 110% 25%;
+    -moz-transform-origin: 110% 25%;
+    -ms-transform-origin: 110% 25%;
+    -o-transform-origin: 110% 25%;
+    transform-origin: 110% 25%;
+
+    left: 20%;
+}
+
+.maki {
+
+    -webkit-transform: perspective(600px) translateZ(1px) !important;
+    -moz-transform: perspective(600px) translateZ(1px) !important;
+    -ms-transform: perspective(600px) translateZ(1px) !important;
+    -o-transform: perspective(600px) translateZ(1px) !important;
+    transform: perspective(600px) translateZ(1px) !important;
+
+    left: 50%;
+}
+
+.sashimi {
+
+    -webkit-transform: perspective(1200px) rotateY(-40deg) !important;
+    -moz-transform: perspective(1200px) rotateY(-40deg) !important;
+    -ms-transform: perspective(1200px) rotateY(-40deg) !important;
+    -o-transform: perspective(1200px) rotateY(-40deg) !important;
+    transform: perspective(1200px) rotateY(-40deg) !important;
+
+    -webkit-transform-origin: -10% 25%;
+    -moz-transform-origin: -10% 25%;
+    -ms-transform-origin: -10% 25%;
+    -o-transform-origin: -10% 25%;
+    transform-origin: -10% 25%;
+
+    left: 80%;
+}
+/******************************************************************/
+/******************************************************************/
+</style>
+
+    <section class="menu3D">
+
+        <dl class="list3D nigiri">
+            <dt>Nigiri</dt>
+            <dd><a href="#">Maguro</a></dd>
+            <dd><a href="#">Sake</a></dd>
+            <dd><a href="#">Unagi</a></dd>
+            <dd><a href="#">Buri</a></dd>
+            <dd><a href="#">Suzuki</a></dd>
+            <dd><a href="#">Saba</a></dd>
+            <dd><a href="#">Iwashi</a></dd>
+            <dd><a href="#">Kohada</a></dd>
+            <dd><a href="#">Hirame</a></dd>
+            <dd><a href="#">Tobiwo</a></dd>
+        </dl>
+
+        <dl class="list3D maki">
+            <dt>Maki</dt>
+            <dd><a href="#">Ana-kyu</a></dd>
+            <dd><a href="#">Chutoro</a></dd>
+            <dd><a href="#">Kaiware</a></dd>
+            <dd><a href="#">Kampyo</a></dd>
+            <dd><a href="#">Kappa</a></dd>
+            <dd><a href="#">Natto</a></dd>
+            <dd><a href="#">Negitoro</a></dd>
+            <dd><a href="#">Oshinko</a></dd>
+            <dd><a href="#">Otoro</a></dd>
+            <dd><a href="#">Tekka</a></dd>
+        </dl>
+
+        <dl class="list3D sashimi">
+            <dt>Sashimi</dt>
+            <dd><a href="#">Maguro</a></dd>
+            <dd><a href="#">Toro</a></dd>
+            <dd><a href="#">Ebi</a></dd>
+            <dd><a href="#">Saba</a></dd>
+            <dd><a href="#">Ika</a></dd>
+            <dd><a href="#">Tako</a></dd>
+            <dd><a href="#">Tomago</a></dd>
+            <dd><a href="#">Kani</a></dd>
+            <dd><a href="#">Katsuo</a></dd>
+            <dd><a href="#">Maguro</a></dd>
+        </dl>
+
+        <a href="#" class="toggle3D">Toggle</a>
+<div style="text-align:center">    
+</div>
+    </section>
+    
+    <script src="js/user/ui/makisu.min.js"></script>
+    <script>
+
+        // The `enabled` flag will be `false` if CSS 3D isn't available
+
+        if ( $.fn.makisu.enabled ) {
+
+            var $sashimi = $( '.sashimi' );
+            var $nigiri = $( '.nigiri' );
+            var $maki = $( '.maki' );
+
+            // Create Makisus
+
+            $nigiri.makisu({
+                selector: 'dd',
+                overlap: 0.85,
+                speed: 1.7
+            });
+
+            $maki.makisu({
+                selector: 'dd',
+                overlap: 0.6,
+                speed: 0.85
+            });
+
+            $sashimi.makisu({
+                selector: 'dd',
+                overlap: 0.2,
+                speed: 0.5
+            });
+
+            // Open all
+            
+            $( '.list3D' ).makisu( 'open' );
+
+            // Toggle on click
+
+            $( '.toggle3D' ).on( 'click', function() {
+                $( '.list3D' ).makisu( 'toggle' );
+            });
+
+            // Disable all links
+
+            $( '.menu3D a' ).click( function( event ) {
+                event.preventDefault();
+            });
+
+        } else {
+
+            $( '.warning3D' ).show();
+        }
+
+    </script>    

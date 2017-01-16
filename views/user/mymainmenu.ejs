@@ -1,0 +1,203 @@
+<style>
+/******************************************************************/
+/******************************************************************/
+ul.ldd_menu
+{	margin:           0px;
+	padding:          0;
+	display:          block;
+	height:           40px;/*50px;*/
+	list-style:       none;
+	font-family:      sans-serif;
+	text-align:       center;
+	opacity:          0.618;
+}
+
+ul.ldd_menu a
+{	text-decoration:  none;
+}
+
+ul.ldd_menu > li
+{	float:            left;
+	position:         fixed;
+	width:            100%;
+	z-index:          9999;
+}
+
+ul.ldd_menu > li > span
+{	float:            right;
+	color:            #CCC;
+	background-color: #333333;
+	height:           40px;/*50px;*/
+	line-height:      40px;/*50px;*/
+	cursor:           default;
+	padding:          0px 20px;
+	text-shadow:      0px 0px 1px #CCC;
+	}
+
+.sub_wrap
+{	width:            100%;/*2500px;*/
+	margin:           0 auto 0 auto;
+	background-color: #000;
+}
+
+ul.ldd_menu ul
+{	list-style:       none;
+	display:          inline-block;
+	border-left:      1px dotted #FFF;
+	margin-top:       20px;
+	margin-right:     0px;
+	margin-bottom:    10px;
+	margin-left:      20px;
+	padding-top:      10px;
+	padding-right:    5px;
+	padding-bottom:   10px;
+	padding-left:     10px;
+}
+
+ul.ldd_menu .ldd_submenu
+{	position:         absolute;
+	top:              40px;/*50px;*/
+	width:            100%;
+	display:          none;
+	opacity:          0.90;
+	font-size:        10px;
+	background-color: #000;
+}
+
+a.ldd_subfoot
+{	background-color: #f0f0f0;
+	color:            #444;
+	display:          block;
+	clear:            both;
+	padding:          15px 20px;
+	/*font-family:    sans-serif;*/
+	font-size:        10px;
+	text-shadow:      0px 0px 1px #fff;
+	box-shadow:       0px 0px 2px #777 inset;
+}
+
+li.ldd_heading
+{	/*font-family:      sans-serif;*/
+	font-size:        13px;
+	font-style:       italic;
+	color:            #FF3300;
+	text-shadow:      0px 0px 1px #B03E23;
+	padding:          0px 0px 10px 0px;
+}
+
+ul.ldd_menu ul li a
+{	/*font-family:      sans-serif;*/
+	font-size:        12px;
+	line-height:      20px;
+	color:            #fff;
+	padding:          1px 3px;
+}
+
+ul.ldd_menu ul li a:hover
+{	background:       #FF3300;
+}
+/******************************************************************/
+/******************************************************************/
+</style>
+
+    <ul id="ldd_menu" class="ldd_menu">
+		<li><span>Menu</span>
+            <div class="ldd_submenu">
+				<ul>
+			    	<li class="ldd_heading">About Us</li>
+					<li><a href="#">Our Visions</a></li>
+					<li><a href="#">Our History</a></li>
+					<li><a href="#">Our People</a></li>
+					<li><a href="#">Recruit</a></li>
+				</ul>
+				<ul>
+					<li class="ldd_heading">Festivals</li>
+					<li><a href="#">Current</a></li>
+					<li><a href="#">Development</a></li>
+                    <li><a href="#"></a></li>
+					<li><a href="#"></a></li>
+				</ul>
+                <ul>
+					<li class="ldd_heading">Site</li>
+					<li><a href="#">Current</a></li>
+					<li><a href="#">Development</a></li>
+                    <li><a href="#"></a></li>
+					<li><a href="#"></a></li>
+				</ul>
+                 <ul>
+					<li class="ldd_heading">Pathways</li>
+					<li><a href="#">Current</a></li>
+				    <li><a href="#">Development</a></li>
+                    <li><a href="#"></a></li>
+					<li><a href="#"></a></li>
+				</ul>
+				<ul>
+					<li class="ldd_heading">Work With You</li>
+					<li><a href="#">Work Shops</a></li>
+					<li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+					<li><a href="#"></a></li>
+				</ul>
+                <ul>
+					<li class="ldd_heading">News</li>
+                    <li><a href="#">Latest Updates</a></li>
+					<li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+					<li><a href="#"></a></li>
+				</ul>
+                <ul>
+					<li class="ldd_heading">Donate</li>
+                    <li><a href="#">Helping Us</a></li>
+					<li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+					<li><a href="#"></a></li>
+				</ul>
+                <ul>
+					<li class="ldd_heading">Contact</li>
+                    <li><a href="#">Finding Us</a></li>
+					<li><a href="#">Email</a></li>
+                    <li><a href="#">Facebook</a></li>
+					<li><a href="#">Twitter</a></li>
+				</ul>
+				
+				<a class="ldd_subfoot" href="#"> Accessibility Link</a>
+			</div>
+		</li>
+	</ul>
+
+	<script>
+        $(document).ready(function()
+        {   /*the menu*/
+			var $menu = $('#ldd_menu');
+			 	
+			/** * for each list element,
+			    * we show the submenu when hovering and
+				* expand the span element (title) to 510px
+			*/
+			$menu.children('li').each(function()
+			{   var $this = $(this);
+				var $span = $this.children('span');
+				$span.data('width',$span.width());
+					
+				$this.bind('mouseenter',function()
+				{   $menu.find('.ldd_submenu').stop(true,true).hide();
+					$span.stop().animate({'width':'320%'},200,function()
+					{   $this.find('.ldd_submenu').slideDown(400);
+					});
+				})
+				.bind('mouseleave',function()
+				{   /**$this.find('.ldd_submenu').stop(true,true).hide(); */
+					$span.stop().animate({'width':$span.data('width')+'px'},300);
+					$this.find('.ldd_submenu').slideUp(400);
+				});
+			});
+        });
+			
+		//ipad and iphone fix
+        if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) 
+        {   $(" #ldd_menu li a").click(function()
+            {    //we just need to attach a click event listener to provoke iPhone/iPod/iPad's hover event strange
+            });
+        }
+
+	</script>

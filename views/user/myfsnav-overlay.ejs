@@ -1,0 +1,193 @@
+<style>
+/******************************************************************/
+/******************************************************************/
+
+.menu-trigger {
+  cursor: pointer;
+  position: fixed;
+  padding: 1rem;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  color: black;
+  transform: rotate(225deg);
+  transition: all 350ms ease;
+}
+
+.menu-trigger.open {
+  color: white;
+  transform: rotate(0deg);
+}
+
+.icon {
+  display: inline-block;
+  font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+.icon.icon-menu:before {
+  content: '\f136';
+  font-size: 3rem;
+} 
+
+/******************************************************************/
+/******************************************************************/
+#fsnav-overlay {
+  overflow:   hidden;
+  position:   fixed;
+  width:      100%;
+  height:     100%;
+}
+
+#fsnav-overlay nav {
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  list-style: none;
+  z-index: 90;
+  -webkit-transition: top 350ms ease;
+  transition: top 350ms ease;
+}
+
+#fsnav-overlay nav li {
+  display: block;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+#fsnav-overlay nav a, #fsnav-overlay nav a:visited {
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 15px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+}
+
+#fsnav-overlay nav a:hover, #fsnav-overlay nav a:focus, #fsnav-overlay nav a:visited, #fsnav-overlay nav a:visited:hover, #fsnav-overlay nav a:visited:focus, #fsnav-overlay nav a:visited:visited { text-decoration: underline; }
+
+#fsnav-overlay.open nav { top: 0; }
+
+#fsnav-overlay:before, #fsnav-overlay:after {
+  content: "";
+  position: absolute;
+  z-index: 50;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: blue;
+  transition: transform 350ms, -webkit-transform 350ms;
+  background-image: url(bg.jpg);
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center center;
+}
+
+#fsnav-overlay:before {
+  left: 0;
+  -webkit-transform: skew(50deg) translateX(-200%);
+  transform: skew(50deg) translateX(-200%);
+  clip: rect(auto 50vw auto auto);
+}
+@media (min-width: 500px) {
+
+#fsnav-overlay:before {
+  -webkit-transform: skew(50deg) translateX(-150%);
+  transform: skew(50deg) translateX(-150%);
+}
+}
+
+#fsnav-overlay.open:before {
+  -webkit-transform: skew(0) translateX(0%);
+  transform: skew(0) translateX(0%);
+}
+
+#fsnav-overlay:after {
+  right: 0;
+  -webkit-transform: skew(50deg) translateX(200%);
+  transform: skew(50deg) translateX(200%);
+  clip: rect(auto auto auto 50vw);
+}
+
+@media (min-width: 500px) 
+{  #fsnav-overlay:after {  -webkit-transform: skew(50deg) translateX(150%);
+                        transform: skew(50deg) translateX(150%);
+                      }
+}
+
+#fsnav-overlay.open:after {
+  -webkit-transform: skew(0) translateX(0%);
+  transform: skew(0) translateX(0%);
+}
+/******************************************************************/
+/******************************************************************/
+
+</style>
+    
+    <span class="menu-trigger trigger icon icon-menu" rel="fsnav-overlay"></span>
+    <div id="fsnav-overlay">
+        <nav>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About</a></li>
+        </nav>
+    </div>
+
+    <script>
+
+      $(document).ready(function() 
+      { $('.trigger').click(function() 
+        {   var $this = $(this),
+            notThis = $this.hasClass('open'),
+            thisNav = $this.attr("rel");
+            if (!notThis) 
+            {  $('.triggered-area, .trigger').removeClass('open');
+               if ( $( '.trigger' ).hasClass( "block-scroll" ) )
+               {  $('html').removeClass('disable-scroll');
+                  $('#overlay-mobile').removeClass('visible');
+               }
+            }
+            $this.toggleClass('open');
+            $("#"+thisNav).toggleClass('open');
+            if ( $( this ).hasClass( "block-scroll" ) )
+            {  $('html').toggleClass('disable-scroll');
+               $('#overlay-mobile').toggleClass('visible');
+            }
+        });
+        
+        $(document).on('click', function(event)
+        {   if (!$(event.target).closest('.triggered-area, .trigger').length) 
+            {  $('.triggered-area, .trigger').removeClass('open');
+               if ( $( '.trigger' ).hasClass( "block-scroll" ) )
+               {  $('html').removeClass('disable-scroll');
+                  $('#overlay-mobile').removeClass('visible');
+               }
+            }
+        });
+      });
+
+    </script>
+        

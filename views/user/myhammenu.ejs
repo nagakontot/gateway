@@ -1,0 +1,162 @@
+<style>
+/******************************************************************/
+/******************************************************************/
+.hammenu-wrapper 
+{ position: absolute;
+  top:      50px;
+  right: 5px;
+  width: 64px;
+  height: 64px;
+  z-index: 3200;
+  -webkit-transition: all 300ms ease 0ms;
+  transition: all 300ms ease 0ms;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+
+.hammenu-wrapper:after 
+{ content: '\f0c9';
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background-color: #666;
+  top: 0;
+  left: 0;
+  font: 24px/64px 'FontAwesome';
+  text-align: center;
+  color: #fff;
+}
+
+.hammenu-wrapper nav 
+{ position: absolute;
+  top: 0;
+  right: 0;
+  width: 64px;
+  height: 64px;
+  z-index: -1;
+}
+
+.hammenu-wrapper nav a 
+{ box-sizing: border-box;
+  background-color: rgba(128, 128, 128, 0.33);
+  border-color: #999;
+  border-style: solid;
+  border-width: 0 1px;
+  color: black;
+  display: block;
+  font: 14px/64px sans-serif;
+  height: 64px;
+  opacity: 0.5;
+  padding: 0px 26px;
+  position: absolute;
+  right: -1px;
+  text-align: left;
+  text-decoration: none;
+  top: 0;
+  -webkit-transition: all 300ms ease 0ms, width 0ms ease-out 0ms;
+  transition: all 300ms ease 0ms, width 0ms ease-out 0ms;
+  vertical-align: middle;
+  width: 64px;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.hammenu-wrapper nav a i 
+{ vertical-align: middle;
+  font-size: 20px;
+}
+
+.hammenu-wrapper nav a span 
+{ display: inline;
+  vertical-align: middle;
+  -webkit-transform: scale(0, 1);
+  margin-left: 5px;
+  text-transform: uppercase;
+}
+
+.hammenu-wrapper nav a:first-of-type 
+{ border-width: 1px 1px 0 1px;
+}
+
+.hammenu-wrapper nav a:last-of-type 
+{ border-width: 0 1px 1px 1px;
+}
+
+.hammenu-wrapper nav a:hover 
+{ background-color: gray;
+  color: white;
+}
+
+.hammenu-wrapper nav a:hover span 
+{ color: white;
+}
+
+.hammenu-wrapper.open:before 
+{ content: '';
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 0px;
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+
+.hammenu-wrapper.open nav a 
+{ opacity: 1;
+  width: 280px;
+}
+
+.hammenu-wrapper.open nav a:nth-child(1) 
+{ -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  -webkit-transition: all 200ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 200ms, opacity 300ms ease-in 0ms;
+  transition: all 200ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 200ms, opacity 300ms ease-in 0ms;
+}
+
+.hammenu-wrapper.open nav a:nth-child(2) 
+{ -webkit-transform: translateY(200%);
+          transform: translateY(200%);
+  -webkit-transition: all 400ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 400ms, opacity 300ms ease-in 100ms;
+  transition: all 400ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 400ms, opacity 300ms ease-in 100ms;
+}
+
+.hammenu-wrapper.open nav a:nth-child(3) 
+{ -webkit-transform: translateY(300%);
+          transform: translateY(300%);
+  -webkit-transition: all 600ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 600ms, opacity 300ms ease-in 200ms;
+  transition: all 600ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 600ms, opacity 300ms ease-in 200ms;
+}
+
+.hammenu-wrapper.open nav a:nth-child(4) 
+{ -webkit-transform: translateY(400%);
+          transform: translateY(400%);
+  -webkit-transition: all 800ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 800ms, opacity 300ms ease-in 300ms;
+  transition: all 800ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 800ms, opacity 300ms ease-in 300ms;
+}
+
+.hammenu-wrapper.open nav a:nth-child(5) 
+{ -webkit-transform: translateY(500%);
+          transform: translateY(500%);
+  -webkit-transition: all 1000ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 1000ms, opacity 300ms ease-in 400ms;
+  transition: all 1000ms ease-in-out 0ms, color 200ms ease 0ms, background-color 200ms ease 0ms, width 300ms ease-in 1000ms, opacity 300ms ease-in 400ms;
+}
+
+/******************************************************************/
+/******************************************************************/    
+</style>
+
+    <div class="hammenu-wrapper">
+        <nav>
+            <a href="javascript:void(0)"><i class="fa fa-times"></i>    <span>Label1</span></a>
+            <a href="javascript:void(0)"><i class="fa fa-cart-plus"></i><span>Label2</span></a>
+            <a href="javascript:void(0)"><i class="fa fa-fax"></i>      <span>Label3</span></a>
+            <a href="javascript:void(0)"><i class="fa fa-magic"></i>    <span>Label4</span></a>
+            <a href="javascript:void(0)"><i class="fa fa-wifi"></i>     <span>Label5</span></a>
+        </nav>
+    </div><!--.hammenu-wrapper-->
+    
+    <script>
+	    $('.hammenu-wrapper').click(function() {$(this).toggleClass('open');});        
+	</script>

@@ -1,0 +1,267 @@
+
+<style>
+/******************************************************************/
+/******************************************************************/
+video
+{   position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background: url('assets/firebase.png') no-repeat;
+    background-size: cover;
+    transition: 1s opacity;
+}
+
+.stopfade 
+{  opacity: .5;
+}
+
+#polina { 
+  /*font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;*/
+  position:        absolute;
+  font-family:     sans-serif;
+  font-weight:     100; 
+  background:      rgba(0,0,0,0.3);
+  color:           white;
+  padding:         1%;/*2rem;*/
+  width:           33%;
+  margin:          5%;/*2rem;*/
+  /*float:         right;*/
+  font-size:       1.2rem;
+}
+
+h1 
+{ font-size:        3rem;
+  text-transform:   uppercase;
+  margin-top:       0;
+  letter-spacing:   .3rem;
+}
+
+#polina button 
+{ display:         block;
+  width:           80%;
+  padding:         .4rem;
+  border:          none; 
+  margin:          1rem auto; 
+  font-size:       1.3rem;
+  background:      rgba(255,255,255,0.23);
+  color:           #fff;
+  border-radius:   3px; 
+  cursor:          pointer;
+  transition:      .3s background;
+}
+
+#polina button:hover 
+{  background: rgba(0,0,0,0.5);
+}
+
+/*
+a 
+{ display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  background:rgba(0,0,0,0.5);
+  padding: .5rem;
+  transition: .6s background; 
+}
+
+a:hover
+{ background:rgba(0,0,0,0.9);
+}
+*/
+
+@media screen and (max-width: 500px) { 
+  div{width:70%;} 
+}
+@media screen and (max-device-width: 800px) {
+  html { background: url('asset/firebase.png') #000 no-repeat center center fixed; }
+  #bgvid { display: none; }
+}
+
+/******************************************************************/
+/******************************************************************/
+@font-face {
+  font-family: 'icomoon';
+  src: url('../../icon/icomoon1.eot');
+  src: url('../../icon/icomoon2.eot')  format('embedded-opentype'), 
+       url('../../icon/icomoon.woff')  format('woff'), 
+       url('../../icon/icomoon.ttf')   format('truetype'), 
+       url('../../icon/icomoon.svg')   format('svg');
+  /*     
+  src: url('http://toddhpage.com/codepen/icomoon.eot?i43w74');
+  src: url('http://toddhpage.com/codepen/icomoon.eot?#iefixi43w74') format('embedded-opentype'), 
+       url('http://toddhpage.com/codepen/icomoon.woff?i43w74') format('woff'), 
+       url('http://toddhpage.com/codepen/icomoon.ttf?i43w74') format('truetype'), 
+       url('http://toddhpage.com/codepen/icomoon.svg?i43w74#icomoon') format('svg');
+  */
+  font-weight:   normal;
+  font-style:   normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] 
+{ font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-screen:before 
+{ content: "\e600";
+}
+
+.icon-headphones:before 
+{ content: "\e601";
+}
+
+.icon-pencil:before 
+{ content: "\e602";
+}
+
+.icon-user:before 
+{ content: "\e603";
+}
+
+.icon-camera:before 
+{ content: "\e604";
+}
+
+.item 
+{ cursor:     pointer;
+  position:   relative;
+  width:      100px;
+  height:     100px;
+  overflow:   hidden;
+  transform:  skew(-30deg);
+  display:    inline-block;
+  border:     2px solid #FFF;
+  transition: width .5s;
+  margin:     1%;
+}
+
+.item:after 
+{ position: absolute;
+  left: 12px;
+  top: 59px;
+  color: #FFF;
+  font-size: 40px;
+  font-family: 'icomoon';
+  transform: skew(30deg);
+  -webkit-text-stroke: 1px black;
+}
+
+.item:nth-of-type(1) 
+{ -webkit-filter: grayscale(60%) contrast(200%) hue-rotate(250deg) invert(20%);
+}
+
+.item:nth-of-type(1):after 
+{ content: "\e600";
+}
+
+.item:nth-of-type(2) 
+{ -webkit-filter: grayscale(100%);
+}
+
+.item:nth-of-type(2):after 
+{ content: "\e601";
+  font-size: 36px;
+}
+
+.item:nth-of-type(3) 
+{ -webkit-filter: contrast(80%) saturate(20%);
+}
+
+.item:nth-of-type(3):after 
+{ content: "\e602";
+  font-size: 33px;
+}
+
+.item:nth-of-type(3) video 
+{ top: -230px;
+  left: -5px;
+}
+
+.item:nth-of-type(4) 
+{ -webkit-filter: contrast(150%) saturate(80%) invert(10%) grayscale(90%);
+}
+
+.item:nth-of-type(4):after 
+{ content: "\e603";
+}
+
+.item:nth-of-type(4) video 
+{ top: -60px;
+}
+
+.item:hover,
+.item .active 
+{ width: 490px;
+}
+
+.item video 
+{ position: absolute;
+  left: 0px;
+  top: -140px;
+  transform: skew(30deg);
+}
+
+
+/******************************************************************/
+/******************************************************************/
+</style>
+
+  <!--video poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg" id="bgvid" playsinline autoplay muted loop-->
+  <!--video poster="assets/firebase.png" id="bgvid" playsinline autoplay muted loop-->
+  <video id="bgvid" playsinline autoplay muted loop>
+    <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+    <source src="video/glacier.webm" type="video/webm">
+    <!--source src="video/glacier.mp4" type="video/mp4"-->
+  </video>
+  
+      <div class="item">
+          <!--video autoplay loop muted-->
+          <video id="headvid1" loop muted>
+            <source src="video/nambia1.webm" type="video/webm">
+          </video>
+          <span class="icon-screen"></span>
+      </div>
+      <div class="item">
+          <!--video autoplay loop muted-->
+          <video id="headvid2" loop muted>
+            <source src="video/nambia2.webm" type="video/webm">
+          </video>
+      </div>
+      <div class="item">
+          <!--video autoplay loop muted-->
+          <video id="headvid3" loop muted>
+            <source src="video/nambia3.webm" type="video/webm">
+          </video>
+      </div>
+      <div class="item">
+          <!--video autoplay loop muted-->
+          <video id="headvid4" loop muted>
+            <source src="video/lake.webm" type="video/webm">
+          </video>
+      </div>  
+  
+  <div id="polina">
+      <h1>
+          <p>Welcome to <%=title%></p><br/>
+      </h1>      
+    
+      <button>Pause</button>
+      <button onclick='signin()'>Login</button>
+
+      <!--a href="/user/logout"><button>Logout</button></a-->
+      <button onclick='$("html").fadeOut(function (){window.location.href = "/user/logout";});'>Logout</button></a>
+  </div>

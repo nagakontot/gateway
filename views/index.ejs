@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="stylesheets/index/index.css"></link>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.auth0.com/js/lock/10.3/lock.min.js"></script>
+    
+    <script>
+        $(document).ready(function() 
+        {   // fade in content.
+		        $( '#content-wrapper' ).fadeIn("slow");		
+        });
+    </script>          
+  </head>
+
+  <body>
+    
+    <div id="content-wrapper" style="display:none;"> 
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+  
+    <%include index/myindex.ejs%>
+
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    </div> <!--div id="content-wrapper"-->
+
+    <script src="js/index/index.js"></script>
+    
+    <script>
+      var lock = new Auth0Lock( "<%=env.clientID%>",
+                                "<%=env.domain%>",
+                                { auth: { redirectUrl: "<%=env.callbackURL%>",
+                                          responseType: 'code',
+                                          params: { scope: 'openid name email picture'}
+                                        }
+                                });
+
+      function signin(){   lock.show();}
+    </script>
+  
+  </body>
+
+</html>

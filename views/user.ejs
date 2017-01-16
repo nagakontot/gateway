@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<head>
+	<title>1sekolah</title>
+	<!--link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"></link-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jspanel3/3.3.1/jquery.jspanel.min.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" media="all" title="Screen"></link>
+	<!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" media="all" title="Screen"></link-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">    
+	
+	<link rel="stylesheet" href="stylesheets/user/main.css"></link>
+	<link rel="stylesheet" href="js/lib/smallipop/css/jquery.smallipop.min.css" media="all" title="Screen"></link>
+
+    
+	<!-------------------------------------------------------------------------------------->
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.1/less.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspanel3/3.3.1/jquery.jspanel-compiled.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+    
+	<script src="js/user/myutils.js"></script>
+	<script src="js/lib/db/myfirebase.js"></script>
+	<script src="js/lib/smallipop/lib/jquery.smallipop.min.js"></script>    <!--http://www.jqueryscript.net/demo/Versatile-Beautiful-Tooltip-Plugin-smallipop/-->
+
+	<!-------------------------------------------------------------------------------------->
+	<!-------------------------------------------------------------------------------------->
+	
+	<script src="js/lib/threejs/three_v82.min.js"></script>
+	<script src="js/lib/threejs/PlayerControls.js"></script>
+	<script src="js/lib/threejs/js/libs/stats.min.js"></script>
+
+    <script>
+        $(document).ready(function() 
+        {   // fade in content.
+		    $( '#content-wrapper' ).fadeIn("slow");		
+		    ///////////////////////////////////////////////
+        });
+        
+        function myready()
+        {   /*
+            var container       = document.getElementById("container");
+            container.addEventListener("click",   function()
+            {   //if(document.activeElement)document.activeElement.focus();
+                if(document.activeElement == document.getElementsByTagName("iframe")[0]) 
+                {   console.log('iframe has focus');
+                } 
+                else 
+                {   console.log('iframe not focused');
+                    //document.activeElement.blur();
+                    //document.getElementById("iframecontent").blur();
+                    //document.getElementById("container").focus();
+                }      
+            });    
+            */
+            //////////////////////////////////////////////////////////////////////
+            //document.getElementById("container").addEventListener("click",   function(){ if(document.activeElement)document.activeElement.blur();});
+            //////////////////////////////////////////////////////////////////////
+            /*
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+            (function()
+            {   var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                s1.async=true;
+                s1.src='https://embed.tawk.to/580cd22be808d60cd071dff0/default';
+                s1.charset='UTF-8';
+                s1.setAttribute('crossorigin','*');
+                s0.parentNode.insertBefore(s1,s0);
+            })();
+            */
+            ///////////////////////////////////////////////////////////////////////
+            //$(".slide-menu").slidemenu();
+            /////////////////////////////////////////////////////////////////////// 
+            /*
+            (function(w, d, s, u) 
+            {   w.RocketChat = function(c) { w.RocketChat._.push(c) }; w.RocketChat._ = []; w.RocketChat.url = u;
+	            var h = d.getElementsByTagName(s)[0], j = d.createElement(s);
+	            j.async = true; j.src = 'https://www.1sekolah.xyz/packages/rocketchat_livechat/assets/rocket-livechat.js';
+	            h.parentNode.insertBefore(j, h);
+            })(window, document, 'script', 'https://www.1sekolah.xyz/livechat');
+            */
+            ////////////////////////////////////////////////////////////////////////
+            // blur the iframe
+            //document.getElementById("iframecontent").blur();
+            // set focus on #foo
+            //document.getElementById("container").focus();
+            // when iframe tries to focus, focus #foo
+            //document.getElementById("container").onblur = function() {this.focus();};
+        };
+
+        $(window).resize(function()
+        {    
+        });
+        
+        /////////////////////////////////////////////////////
+        function myLoad()
+        {   history.pushState({},'','user');
+            myready();
+            //focusit();
+            breakout();
+        }
+    </script>
+
+</head>
+
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+
+<body onload="myLoad();" onclick="myClickFunction();">
+<!--body onload="myLoad();"-->
+    
+    <div id='container'></div>
+    <div id="content-wrapper" style="display:none;">
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+        <%include user/mycontextmenu.ejs%>
+        
+        <!--%include user/mypanel1.ejs%-->
+        <!--%include user/mymainmenu.ejs%--->
+        <!--%include user/myrightsidemenu.ejs%-->
+        
+        <%include user/myfsnav-overlay.ejs%>
+        <!--%include user/myleftsidemenu.ejs%-->
+        <!--%include user/myclassyfooter.ejs%-->
+        <!--%include user/myhammenu.ejs%-->
+        <!--%include user/mysidenavi.ejs%-->
+        <!--%include user/mymenu3D.ejs%-->
+        <%include user/mycabinet.ejs%>
+        
+        <!--
+        <div id="iframecontent" style="position:absolute; left:10%; right:10%; bottom:10%; top:10%;">
+            <iframe width="100%" height="100%" frameborder="0" src="home"></iframe>
+        </div>
+        -->
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    </div> <!--div id="content-wrapper"-->
+    
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    <script src="js/user/scene1/player.js"></script>
+    <script src="js/user/scene1/game.js"></script>
+    <script src="js/user/scene1/main.js"></script>
+	    
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    <script>
+        $(document).ready(function() 
+        {   
+        });
+
+
+        /////////////////////////////////
+        (function(w, d, s, u) 
+        {   w.RocketChat = function(c) { w.RocketChat._.push(c) }; w.RocketChat._ = []; w.RocketChat.url = u;
+	        var h = d.getElementsByTagName(s)[0], j = d.createElement(s);
+	        j.async = true; j.src = 'https://rchat.1sekolah.xyz/packages/rocketchat_livechat/assets/rocket-livechat.js';
+	        h.parentNode.insertBefore(j, h);
+        })(window, document, 'script', 'https://rchat.1sekolah.xyz/livechat');
+        /////////////////////////////////      
+        /*
+        function focusit()
+        {   //if(document.activeElement)
+            //{   //document.activeElement.blur();
+            
+                //document.getElementById("iframecontent").blur();
+                // set focus on #foo
+                //document.getElementById("container").focus();
+                //document.getElementById('container').focus();
+                // when iframe tries to focus, focus #foo
+                //document.getElementById("container").onblur = function() {this.focus();};
+            //}
+            
+            
+            if(document.activeElement == document.getElementsByTagName("iframe")[0]) 
+            {   console.log('iframe has focus');
+                document.activeElement.blur();
+            } 
+            else 
+            {   console.log('iframe not focused');
+                //document.activeElement.blur();
+                //document.getElementById("iframecontent").blur();
+                document.getElementById("container").focus();
+            }            
+        }
+        setInterval(focusit, 10);
+        */
+        /////////////////////////////////////
+        /*
+        $(document).on('focusout', function()
+        {   setTimeout(function()
+            {  // using the 'setTimout' to let the event pass the run loop
+               if (document.activeElement instanceof HTMLIFrameElement) 
+               {    // Do your logic here..
+                    console.log('iframe has focus');
+               }
+               else
+               {    console.log('iframe not focused');
+                    //document.activeElement.blur();
+                    //document.getElementById("iframecontent").blur();
+                    //document.getElementById("container").focus();
+               }
+            },0);
+        });        
+        */
+        ////////////////////////////////////
+        /*
+        var container       = document.getElementById("container");
+        container.addEventListener("click",   function()
+        {   //if(document.activeElement)document.activeElement.focus();
+            if(document.activeElement == document.getElementsByTagName("iframe")[0]) 
+            {   console.log('iframe has focus');
+            } 
+            else 
+            {   console.log('iframe not focused');
+                //document.activeElement.blur();
+                //document.getElementById("iframecontent").blur();
+                //document.getElementById("container").focus();
+            }      
+        });
+        */
+        ///////////////////////////////////
+        /*
+        var monitor = setInterval(function()
+        {   var elem = document.activeElement;
+            if(elem && elem.tagName == 'IFRAME')
+            {   //clearInterval(monitor);
+                alert('clicked on IFRAME!');
+                //console.log('iframe has focus');
+            }
+            else if(elem && elem.tagName == 'BODY')
+            {   //clearInterval(monitor);
+                alert('clicked on BODY!');
+                //console.log('iframe has focus');
+            }
+        }, 100);
+        */
+        /////////////////////////////////////////
+        
+        function myClickFunction() 
+        {   //var elem = document.activeElement.tagName;
+            //document.getElementById("demo").innerHTML = elem;
+            //console.log('document.activeElement.tagName='+elem);
+            ///////////////////////////////////////////
+            var elem = document.activeElement;
+            if(elem && elem.tagName == 'IFRAME')
+            {    document.activeElement.blur();    //<<-- this command will default to body focus
+                 //console.log('document.activeElement.blur();');
+            }
+        }
+        
+   
+    </script>
+
+
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+
+</body>
+</html>
