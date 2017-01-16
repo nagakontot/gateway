@@ -8,9 +8,12 @@ var redbird = require('redbird')
 
     // Specify filenames to default SSL certificates (in case SNI is not supported by the user's browser)
     ssl:    {   port:   3443,
-                key:    path.join(__dirname + '/key/key.pem'),
-                cert:   path.join(__dirname + '/key/cert.pem'),
-                ca:     path.join(__dirname + '/key/ca-crt.pem'),
+                key:    path.join(__dirname + './../key/key.pem'),
+                cert:   path.join(__dirname + './../key/cert.pem'),
+                ca:     path.join(__dirname + './../key/ca-crt.pem'),
+                //key:    path.join(__dirname + '/key/key.pem'),
+                //cert:   path.join(__dirname + '/key/cert.pem'),
+                //ca:     path.join(__dirname + '/key/ca-crt.pem'),
                 http2:  true,
             }
 });
