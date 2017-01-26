@@ -13,18 +13,21 @@ function init()
 	//container = document.createElement( 'div' );
 	//document.body.appendChild( container );	
 
-	scene = new THREE.Scene();
-
-	camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
+	scene  = new THREE.Scene();
+	camera = new THREE.PerspectiveCamera( 62, window.innerWidth / window.innerHeight, 1, 1000 );
 	camera.position.z = 5;
 
-	renderer = new THREE.WebGLRenderer( { alpha: true} );
+	renderer = new THREE.WebGLRenderer( { antialias: false,alpha: true} );
+	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight);
-	renderer.autoClear = false;
-
+  renderer.setClearColor( 0xffffff); 
+	renderer.autoClear		= false;
+	renderer.gammaInput 	= true;
+	renderer.gammaOutput  = true;
+	
   // Let there be light!
-	var light = new THREE.DirectionalLight( 0xffffff, 1 );
-	light.position.set( 50, 50, 50 );
+	var light = new THREE.DirectionalLight( 0xffffff);
+	light.position.set(1000,1000,1000).normalize();
 	scene.add(light);
 	
 	// Load game world
@@ -32,25 +35,17 @@ function init()
 	firebase.auth().onAuthStateChanged(function( user ) 
 	{	if ( user ) 
 		{	// User is signed in
-
 			console.log( "Player is signed in " );
 			playerID = user.uid;
 
 			fbRef.child( "Players/" + playerID + "/isOnline" ).once( "value" ).then( function( isOnline ) 
-			{	if ( isOnline.val() === null || isOnline.val() === false ) 
-				{	loadGame();
-				} 
-				else 
-				{	alert( "Hey, only one session at a time buddy!" );
-				}
+			{		if ( isOnline.val() === null || isOnline.val() === false )	loadGame();
+					else																												alert( "Hey, only one session at a time buddy!" );
 			});
-
-
 		} 
 		else 
 		{	// User is signed out
 			console.log( "Player is signed out " );
-
 			firebase.auth().signInAnonymously().catch(function(error) 
 			{	console.log( error.code + ": " + error.message );
 			})

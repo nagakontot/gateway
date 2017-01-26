@@ -5,15 +5,10 @@ var path    = require("path")
 //////////////////////////////////////////////////////////////////////
 var redbird = require('redbird')
 ({  port:   3000,
-
-    // Specify filenames to default SSL certificates (in case SNI is not supported by the user's browser)
     ssl:    {   port:   3443,
                 key:    path.join(__dirname + './../key/key.pem'),
                 cert:   path.join(__dirname + './../key/cert.pem'),
                 ca:     path.join(__dirname + './../key/ca-crt.pem'),
-                //key:    path.join(__dirname + '/key/key.pem'),
-                //cert:   path.join(__dirname + '/key/cert.pem'),
-                //ca:     path.join(__dirname + '/key/ca-crt.pem'),
                 http2:  true,
             }
 });
@@ -25,9 +20,10 @@ redbird.register("x11.1sekolah.xyz",            "http://172.18.0.6:10000", {ssl:
 
 //////////////////////////////////////////////////////////////////////
 
-//redbird.register("test1.1sekolah.xyz",           "http://172.18.0.2:8080",  {ssl: true});
+//redbird.register("test1.1sekolah.xyz",           "http://172.18.0.2:8000",  {ssl: true});
 //redbird.register("test1.1sekolah.xyz",           "http://172.18.0.2:1987",  {ssl: true});
-redbird.register("test1.1sekolah.xyz",           "http://172.18.0.2:1987");
+
+
 
 //////////////////////////////////////////////////////////////////////
 /*

@@ -120,7 +120,9 @@
         {   //document.getElementsByTagName('HTML')[0].innerHTML="";
             $("html").fadeOut(function () 
             {   shutdownThreejs();
-                window.location.href = "/user/logout";
+                //window.location.href = "/user/logout";
+                //<button onclick='$("html").fadeOut(function (){window.location.href = "/user/logout";});'>Logout</button></a>
+                $("html").fadeOut(function (){window.location.href = "/user/logout";});
             });
         });
         
