@@ -136,9 +136,9 @@
 <body onload="myLoad();" onclick="myClickFunction();">
 <!--body onload="myLoad();"-->
     
-    <div id="container"></div>      <!--style="z-index:-100;"></div-->
+    <div id="container"></div>
     <!--div id="content-wrapper" style="display:none; z-index:100;"-->
-    <div id="content-wrapper"></div>      <!--style="z-index:100;"--->
+    <div id="content-wrapper">
     <!------------------------------------------------------------------>
     <!------------------------------------------------------------------>
     <!------------------------------------------------------------------>
@@ -168,19 +168,21 @@
     <!------------------------------------------------------------------>
     </div> <!--div id="content-wrapper"-->
     
+
     <!------------------------------------------------------------------>
     <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    <!------------------------------------------------------------------>
+    <script src="js/user/scene1/mythree.js"></script>
     <script src="js/user/scene1/player.js"></script>
     <script src="js/user/scene1/game.js"></script>
     <script src="js/user/scene1/main.js"></script>
-	    
-    <!------------------------------------------------------------------>
-    <!------------------------------------------------------------------>
+    
     <script>
+        /////////////////////////////////
         $(document).ready(function() 
         {   
         });
-
 
         /////////////////////////////////
         (function(w, d, s, u) 
@@ -189,92 +191,10 @@
 	        j.async = true; j.src = 'https://rchat.1sekolah.xyz/packages/rocketchat_livechat/assets/rocket-livechat.js';
 	        h.parentNode.insertBefore(j, h);
         })(window, document, 'script', 'https://rchat.1sekolah.xyz/livechat');
+
         /////////////////////////////////      
-        /*
-        function focusit()
-        {   //if(document.activeElement)
-            //{   //document.activeElement.blur();
-            
-                //document.getElementById("iframecontent").blur();
-                // set focus on #foo
-                //document.getElementById("container").focus();
-                //document.getElementById('container').focus();
-                // when iframe tries to focus, focus #foo
-                //document.getElementById("container").onblur = function() {this.focus();};
-            //}
-            
-            
-            if(document.activeElement == document.getElementsByTagName("iframe")[0]) 
-            {   console.log('iframe has focus');
-                document.activeElement.blur();
-            } 
-            else 
-            {   console.log('iframe not focused');
-                //document.activeElement.blur();
-                //document.getElementById("iframecontent").blur();
-                document.getElementById("container").focus();
-            }            
-        }
-        setInterval(focusit, 10);
-        */
-        /////////////////////////////////////
-        /*
-        $(document).on('focusout', function()
-        {   setTimeout(function()
-            {  // using the 'setTimout' to let the event pass the run loop
-               if (document.activeElement instanceof HTMLIFrameElement) 
-               {    // Do your logic here..
-                    console.log('iframe has focus');
-               }
-               else
-               {    console.log('iframe not focused');
-                    //document.activeElement.blur();
-                    //document.getElementById("iframecontent").blur();
-                    //document.getElementById("container").focus();
-               }
-            },0);
-        });        
-        */
-        ////////////////////////////////////
-        /*
-        var container       = document.getElementById("container");
-        container.addEventListener("click",   function()
-        {   //if(document.activeElement)document.activeElement.focus();
-            if(document.activeElement == document.getElementsByTagName("iframe")[0]) 
-            {   console.log('iframe has focus');
-            } 
-            else 
-            {   console.log('iframe not focused');
-                //document.activeElement.blur();
-                //document.getElementById("iframecontent").blur();
-                //document.getElementById("container").focus();
-            }      
-        });
-        */
-        ///////////////////////////////////
-        /*
-        var monitor = setInterval(function()
-        {   var elem = document.activeElement;
-            if(elem && elem.tagName == 'IFRAME')
-            {   //clearInterval(monitor);
-                alert('clicked on IFRAME!');
-                //console.log('iframe has focus');
-            }
-            else if(elem && elem.tagName == 'BODY')
-            {   //clearInterval(monitor);
-                alert('clicked on BODY!');
-                //console.log('iframe has focus');
-            }
-        }, 100);
-        */
-        /////////////////////////////////////////
-        
         function myClickFunction() 
-        {   //var elem = document.activeElement.tagName;
-            //document.getElementById("demo").innerHTML = elem;
-            //console.log('document.activeElement.tagName='+elem);
-            ///////////////////////////////////////////
-            var elem = document.activeElement;
+        {   var elem = document.activeElement;
             if(elem && elem.tagName == 'IFRAME')
             {    document.activeElement.blur();    //<<-- this command will default to body focus
                  //console.log('document.activeElement.blur();');

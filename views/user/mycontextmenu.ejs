@@ -69,7 +69,10 @@
         }
         
         function shutdownThreejs()
-        {   cancelAnimationFrame(this.requestId);// Stop the animation
+        {   this.mygame.exit(this.requestId);
+            this.controls = null;
+            /*
+            cancelAnimationFrame(this.requestId);// Stop the animation
             this.renderer.domElement.addEventListener('dblclick', null, false); //remove listener to render
             ///////////////////////
             this.renderer.forceContextLoss();
@@ -83,6 +86,7 @@
             this.controls = null;
             //empty(this.modelContainer);
             empty(this.container);
+            */
         }
         
         document.oncontextmenu = function() {return false; };
@@ -118,12 +122,16 @@
 
         $('.rightClick .quit')    .click(function() 
         {   //document.getElementsByTagName('HTML')[0].innerHTML="";
+            shutdownThreejs();
+            window.location.href = "/user/logout";
+            /*
             $("html").fadeOut(function () 
             {   shutdownThreejs();
                 //window.location.href = "/user/logout";
                 //<button onclick='$("html").fadeOut(function (){window.location.href = "/user/logout";});'>Logout</button></a>
                 $("html").fadeOut(function (){window.location.href = "/user/logout";});
             });
+            */
         });
         
         $('.rightClick .reset')   .click(function() {alert("Reset Button Pressed");});
