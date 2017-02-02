@@ -1,7 +1,11 @@
 pm2 start gateway2.js index.js --watch --env production -i max
 pm2 monit
 
-
+////////////////////////////////////////////////////////////
+https://github.com/
+	username:	n@y.c
+	password:	K.._4
+////////////////////////////////////////////////////////////
 //how to update my repository in github	
 //http://archive.railsforum.com/viewtopic.php?id=48601
 	
