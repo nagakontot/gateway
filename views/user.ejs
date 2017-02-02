@@ -43,6 +43,15 @@
 	<script src="js/lib/threejs/PlayerControls.js"></script>
 	<script src="js/lib/threejs/js/libs/stats.min.js"></script>
 
+	
+	<script src="js/lib/threejs/js/loaders/collada/Animation.js"></script>
+	<script src="js/lib/threejs/js/loaders/collada/AnimationHandler.js"></script>
+	<script src="js/lib/threejs/js/loaders/collada/KeyFrameAnimation.js"></script>
+	<script src="js/lib/threejs/js/loaders/ColladaLoader.js"></script>
+	
+    <script src="js/lib/extjs/THREEx/THREEx.KeyboardState.js"></script>
+    <script src="js/lib/extjs/THREEx/raf-throttler.js"></script>
+
     <script>
         $(document).ready(function() 
         {   // fade in content.
@@ -127,8 +136,9 @@
 <body onload="myLoad();" onclick="myClickFunction();">
 <!--body onload="myLoad();"-->
     
-    <div id='container'></div>
-    <div id="content-wrapper" style="display:none;">
+    <div id="container"></div>      <!--style="z-index:-100;"></div-->
+    <!--div id="content-wrapper" style="display:none; z-index:100;"-->
+    <div id="content-wrapper"></div>      <!--style="z-index:100;"--->
     <!------------------------------------------------------------------>
     <!------------------------------------------------------------------>
     <!------------------------------------------------------------------>

@@ -1,7 +1,116 @@
 "use strict"
 
-var container, scene, camera, renderer;
-var stats, requestId;
+		class CScene
+		{		constructor()
+				{		this._scene              = new THREE.Scene();  
+	          this._scene.fog          = new THREE.FogExp2( 0x9999ff, 0.00025 );
+	          return this._scene;
+				}		
+		}
+		
+		class CContainer
+		{		constructor(name)
+				{ 	this._container = (name)? document.createElement(name):document.getElementById('container');
+						this._name			= (name)? name:'container';
+          	document.body.appendChild( this._container );         	
+          	return this._container;
+				}
+		}
+
+		class CRenderer
+		{		constructor(width,height)
+				{   this._renderer           = new THREE.WebGLRenderer({ antialias: false,alpha: true });
+            this._renderer.setPixelRatio( window.devicePixelRatio );
+            this._renderer.setSize( width,height);
+        		this._renderer.setClearColor( 0xffffff); 
+            this._renderer.autoClearColor = false;//true;//
+            this._renderer.gammaInput     = true;
+            this._renderer.gammaOutput    = true;
+            return this._renderer;
+				}
+		}
+		
+		class CStat
+		{		constructor()
+				{		this._stats = new Stats();
+	
+						//var width 	= String(window.innerWidth) + "px";
+  					var height	= String(window.innerHeight-50) + "px";
+  
+						this._stats.domElement.style.position	  = 'absolute';
+						this._stats.domElement.style.left 			= '5px';
+						this._stats.domElement.style.top		  	= height;//'5px';
+						
+						return this._stats;
+				}
+				
+		}
+		
+		class CCamera
+		{		constructor(viewangle,ratio,near,far)
+				{		this._cam = new THREE.PerspectiveCamera(viewangle,ratio,near,far);
+						return this._cam;
+				}
+		}
+		
+		//////////////////////////////////////////////////////////////////////////
+		class CThreejs 
+    	{   constructor(width=window.innerWidth,height=window.innerHeight,fps=30) 
+        	{   this.scene								= new CScene();
+
+        	  	this.container						= new CContainer();
+          	
+            	this.renderer           	= new CRenderer(width,height);          	      
+			    		this.container.appendChild( this.renderer.domElement );		
+            
+            	this.stats              	= new CStat();
+							this.container.appendChild( this.stats.dom );           
+						
+							this.cam 									= new CCamera( 62,width/height,1,1000 );
+							this.cam.position.z 			= 5;
+							
+							this.light								= new THREE.DirectionalLight( 0xffffff);
+							this.light.position.set(1000,1000,1000).normalize();
+							this.scene.add(this.light);
+
+            	this.rafThrottler	    		= new RafThrottler();
+	        		this.rafThrottler.fps   	= fps;	
+	               
+	        		this.texLoader          	= new THREE.TextureLoader();      
+	        		
+	        		this.onWindowResize 			= this.onWindowResize.bind(this);
+	        		window.addEventListener( "resize", this.onWindowResize, false );
+
+	        		//this.WindowResize 			= evt => this.onWindowResize(evt);
+	        		//window.addEventListener( "resize", this.WindowResize, false );
+	        		
+	        		return this;
+        	}
+				        
+        	update(delta)       	{   this.stats.update();}
+        	render()            	{		this.renderer.render( this.scene, this.cam );}
+        	resize(w,h)         	{   this.renderer.setSize(w,h);}
+        
+        	add(node)           	{   this.scene.add(node);}
+        	remove(node)        	{   this.scene.remove(node);}
+
+        	setFPS(fps)         	{   this.rafThrottler.fps  = fps;}
+        
+        	//onWindowResize(evt)	
+        	onWindowResize()	
+        	{		this.cam.aspect 	= window.innerWidth / window.innerHeight;
+							this.cam.updateProjectionMatrix();
+							this.renderer.setSize( window.innerWidth, window.innerHeight );
+					}
+			
+					get camera()					{		return this.cam;}
+    	}
+    	
+//////////////////////////////////////////////////////////////////////////
+//var container, scene, camera, renderer;
+//var stats;
+var mygame;
+var requestId;
 var controls;
 
 init();
@@ -9,29 +118,50 @@ animate();
 
 function init() 
 {	// Setup
-	container = document.getElementById( 'container' );
+	mygame		= new CThreejs();
+	
+/*	
+	container = new CContainer();
+	//container = document.getElementById( 'container' );
 	//container = document.createElement( 'div' );
 	//document.body.appendChild( container );	
 
-	scene  = new THREE.Scene();
+	scene = new THREE.Scene();
+
 	camera = new THREE.PerspectiveCamera( 62, window.innerWidth / window.innerHeight, 1, 1000 );
 	camera.position.z = 5;
 
-	renderer = new THREE.WebGLRenderer( { antialias: false,alpha: true} );
-	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight);
-  renderer.setClearColor( 0xffffff); 
-	renderer.autoClear		= false;
-	renderer.gammaInput 	= true;
-	renderer.gammaOutput  = true;
-	
-  // Let there be light!
-	var light = new THREE.DirectionalLight( 0xffffff);
-	light.position.set(1000,1000,1000).normalize();
-	scene.add(light);
-	
-	// Load game world
+	renderer = new CRenderer(window.innerWidth, window.innerHeight);
+	//renderer = new THREE.WebGLRenderer( { alpha: true} );
+	//renderer.setSize( window.innerWidth, window.innerHeight);
+	//renderer.autoClear = false;
 
+
+  // Let there be light!
+	var light = new THREE.DirectionalLight( 0xffffff, 1 );
+	light.position.set( 50, 50, 50 );
+	scene.add(light);
+
+	container.appendChild( renderer.domElement );
+	//document.body.appendChild( container );
+	
+	stats = new Stats();
+	
+	//var width 	= String(window.innerWidth) + "px";
+    var height	= String(window.innerHeight-50) + "px";
+  
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.left 		= '5px';
+	stats.domElement.style.top		  = height;//'5px';
+
+	container.appendChild( stats.dom );	
+*/	
+	
+	// Events
+	//window.addEventListener( "resize", onWindowResize, false );
+
+	////////////////////////////////////////////////////////////////	
+	// Load game world
 	firebase.auth().onAuthStateChanged(function( user ) 
 	{	if ( user ) 
 		{	// User is signed in
@@ -39,13 +169,17 @@ function init()
 			playerID = user.uid;
 
 			fbRef.child( "Players/" + playerID + "/isOnline" ).once( "value" ).then( function( isOnline ) 
-			{		if ( isOnline.val() === null || isOnline.val() === false )	loadGame();
-					else																												alert( "Hey, only one session at a time buddy!" );
+			{	var isOnlinetrue = ( isOnline.val() === null || isOnline.val() === false );
+				if(isOnlinetrue)loadGame();
+				else						alert( "Hey, only one session at a time buddy!" );				
 			});
+
+
 		} 
 		else 
 		{	// User is signed out
 			console.log( "Player is signed out " );
+
 			firebase.auth().signInAnonymously().catch(function(error) 
 			{	console.log( error.code + ": " + error.message );
 			})
@@ -53,22 +187,6 @@ function init()
 	});
 
 
-	// Events
-	window.addEventListener( "resize", onWindowResize, false );
-
-	container.appendChild( renderer.domElement );
-	document.body.appendChild( container );
-	
-	stats = new Stats();
-	
-	//var width 	= String(window.innerWidth) + "px";
-  var height	= String(window.innerHeight-50) + "px";
-  
-	stats.domElement.style.position = 'absolute';
-	stats.domElement.style.left 		= '5px';
-	stats.domElement.style.top		  = height;//'5px';
-
-	container.appendChild( stats.dom );	
 	
 /*	
 	////////////////////////////////////////////////////////////
@@ -127,7 +245,8 @@ function animate()
 
 function render() 
 {	//renderer.clear();
-	renderer.render( scene, camera );
+	//renderer.render( scene, camera );
+	mygame.render();
 
 	//////////////////////////
     // Update HUD graphics.
@@ -140,12 +259,15 @@ function render()
     renderer.render(sceneHUD, cameraHUD);
     */
    
-   stats.update(); 
+   //stats.update(); 
+   mygame.update(); 
 }
 
+/*
 function onWindowResize() 
-{	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-	
-	renderer.setSize( window.innerWidth, window.innerHeight );
+{	//camera.aspect = window.innerWidth / window.innerHeight;
+	//camera.updateProjectionMatrix();	
+	//renderer.setSize( window.innerWidth, window.innerHeight );
+	mygame.onWindowResize();
 }
+*/

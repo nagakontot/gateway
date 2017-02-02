@@ -1,16 +1,16 @@
 /**
 *
-* Manual Multi-Sample Anti-Aliasing Render Pass
+* Supersample Anti-Aliasing Render Pass
 *
 * @author bhouston / http://clara.io/
 *
-* This manual approach to MSAA re-renders the scene ones for each sample with camera jitter and accumulates the results.
+* This manual approach to SSAA re-renders the scene ones for each sample with camera jitter and accumulates the results.
 *
-* References: https://en.wikipedia.org/wiki/Multisample_anti-aliasing
+* References: https://en.wikipedia.org/wiki/Supersampling
 *
 */
 
-THREE.ManualMSAARenderPass = function ( scene, camera, clearColor, clearAlpha ) {
+THREE.SSAARenderPass = function ( scene, camera, clearColor, clearAlpha ) {
 
 	THREE.Pass.call( this );
 
@@ -24,7 +24,7 @@ THREE.ManualMSAARenderPass = function ( scene, camera, clearColor, clearAlpha ) 
 	this.clearColor = ( clearColor !== undefined ) ? clearColor : 0x000000;
 	this.clearAlpha = ( clearAlpha !== undefined ) ? clearAlpha : 0;
 
-	if ( THREE.CopyShader === undefined ) console.error( "THREE.ManualMSAARenderPass relies on THREE.CopyShader" );
+	if ( THREE.CopyShader === undefined ) console.error( "THREE.SSAARenderPass relies on THREE.CopyShader" );
 
 	var copyShader = THREE.CopyShader;
 	this.copyUniforms = THREE.UniformsUtils.clone( copyShader.uniforms );
@@ -43,15 +43,16 @@ THREE.ManualMSAARenderPass = function ( scene, camera, clearColor, clearAlpha ) 
 	this.camera2 = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
 	this.scene2	= new THREE.Scene();
 	this.quad2 = new THREE.Mesh( new THREE.PlaneGeometry( 2, 2 ), this.copyMaterial );
+	this.quad2.frustumCulled = false; // Avoid getting clipped
 	this.scene2.add( this.quad2 );
 
 };
 
-THREE.ManualMSAARenderPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+THREE.SSAARenderPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
 
-	constructor: THREE.ManualMSAARenderPass,
+	constructor: THREE.SSAARenderPass,
 
-	dispose: function() {
+	dispose: function () {
 
 		if ( this.sampleRenderTarget ) {
 
@@ -68,16 +69,16 @@ THREE.ManualMSAARenderPass.prototype = Object.assign( Object.create( THREE.Pass.
 
 	},
 
-	render: function ( renderer, writeBuffer, readBuffer, delta, maskActive ) {
+	render: function ( renderer, writeBuffer, readBuffer ) {
 
 		if ( ! this.sampleRenderTarget ) {
 
-			this.sampleRenderTarget = new THREE.WebGLRenderTarget( readBuffer.width, readBuffer.height,
-				{ minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat } );
+			this.sampleRenderTarget = new THREE.WebGLRenderTarget( readBuffer.width, readBuffer.height, { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat } );
+			this.sampleRenderTarget.texture.name = "SSAARenderPass.sample";
 
 		}
 
-		var jitterOffsets = THREE.ManualMSAARenderPass.JitterVectors[ Math.max( 0, Math.min( this.sampleLevel, 5 ) ) ];
+		var jitterOffsets = THREE.SSAARenderPass.JitterVectors[ Math.max( 0, Math.min( this.sampleLevel, 5 ) ) ];
 
 		var autoClear = renderer.autoClear;
 		renderer.autoClear = false;
@@ -94,29 +95,40 @@ THREE.ManualMSAARenderPass.prototype = Object.assign( Object.create( THREE.Pass.
 		// render the scene multiple times, each slightly jitter offset from the last and accumulate the results.
 		for ( var i = 0; i < jitterOffsets.length; i ++ ) {
 
-			var jitterOffset = jitterOffsets[i];
+			var jitterOffset = jitterOffsets[ i ];
+
 			if ( this.camera.setViewOffset ) {
+
 				this.camera.setViewOffset( width, height,
 					jitterOffset[ 0 ] * 0.0625, jitterOffset[ 1 ] * 0.0625,   // 0.0625 = 1 / 16
 					width, height );
+
 			}
 
 			var sampleWeight = baseSampleWeight;
-			if( this.unbiased ) {
+
+			if ( this.unbiased ) {
+
 				// the theory is that equal weights for each sample lead to an accumulation of rounding errors.
 				// The following equation varies the sampleWeight per sample so that it is uniformly distributed
 				// across a range of values whose rounding errors cancel each other out.
-				var uniformCenteredDistribution = ( -0.5 + ( i + 0.5 ) / jitterOffsets.length );
+
+				var uniformCenteredDistribution = ( - 0.5 + ( i + 0.5 ) / jitterOffsets.length );
 				sampleWeight += roundingRange * uniformCenteredDistribution;
+
 			}
 
 			this.copyUniforms[ "opacity" ].value = sampleWeight;
 			renderer.setClearColor( this.clearColor, this.clearAlpha );
 			renderer.render( this.scene, this.camera, this.sampleRenderTarget, true );
-			if (i === 0) {
+
+			if ( i === 0 ) {
+
 				renderer.setClearColor( 0x000000, 0.0 );
+
 			}
-			renderer.render( this.scene2, this.camera2, this.renderToScreen ? null : writeBuffer, (i === 0) );
+
+			renderer.render( this.scene2, this.camera2, this.renderToScreen ? null : writeBuffer, ( i === 0 ) );
 
 		}
 
@@ -135,7 +147,7 @@ THREE.ManualMSAARenderPass.prototype = Object.assign( Object.create( THREE.Pass.
 // before being used, thus these integers need to be scaled by 1/16.
 //
 // Sample patterns reference: https://msdn.microsoft.com/en-us/library/windows/desktop/ff476218%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396
-THREE.ManualMSAARenderPass.JitterVectors = [
+THREE.SSAARenderPass.JitterVectors = [
 	[
 		[ 0, 0 ]
 	],

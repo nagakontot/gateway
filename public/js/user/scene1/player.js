@@ -12,11 +12,13 @@ var Player = function( playerID )
 
 	this.init = function() 
 	{	scope.mesh = new THREE.Mesh( cube_geometry, cube_material );
-		scene.add( scope.mesh );
+		//scene.add( scope.mesh );
+		mygame.add( scope.mesh );
 
 		if ( scope.isMainPlayer ) 
 		{	// Give player control of this mesh
-			controls = new THREE.PlayerControls( camera , scope.mesh );
+			//controls = new THREE.PlayerControls( camera , scope.mesh );
+			controls = new THREE.PlayerControls( mygame.camera , scope.mesh );
 			controls.init();
 		}
 	};
