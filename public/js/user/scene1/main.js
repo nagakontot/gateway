@@ -42,6 +42,8 @@ function init()
 function animate() 
 {	requestId =  requestAnimationFrame( animate );
 
+	//requestId =  requestAnimationFrame ( () => {mygame.render ();});
+     
 	if ( controls )controls.update();
 	
 	render();
